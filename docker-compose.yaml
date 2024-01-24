@@ -1,0 +1,62 @@
+version: "3.7"
+
+services:
+  mariadb:
+    image: docker.io/mariadb:10.8
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+      - --skip-innodb-read-only-compressed # Temporary fix for MariaDB 10.6
+    ports:
+      - 3306:3306  
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    networks:
+      - mynetwork
+
+  # postgresql:
+  #   image: postgres:11.8
+  #   environment:
+  #     POSTGRES_PASSWORD: 123
+  #   volumes:
+  #     - postgresql-data:/var/lib/postgresql/data
+  #   networks:
+  #     - mynetwork
+
+  redis-cache:
+    image: docker.io/redis:alpine
+    ports:
+      - 13000:13000
+    networks:
+      - mynetwork
+
+  redis-queue:
+    image: docker.io/redis:alpine
+    ports:
+      - 11000:11000
+    networks:
+      - mynetwork
+
+  frappe:
+    image: docker.io/frappe/bench:latest
+    command: sleep infinity
+    environment:
+      - SHELL=/bin/bash
+    volumes:
+      - ..:/workspace:cached
+    working_dir: /workspace/development
+    ports:
+      - 8000-8005:8000-8005
+      - 9000-9005:9000-9005
+    networks:
+      - mynetwork
+volumes:
+  mariadb-data:
+  postgresql-data:
+
+networks:
+  mynetwork:
+    driver: bridge

@@ -11,7 +11,9 @@ resource "aws_instance" "hrms_inst" {
   }
   provisioner "remote-exec" {
     inline = [
-      "sh /home/ubuntu/frappe-hrms/script.sh ${var.domain}"
+        "git clone https://github.com/argadepp/frappe-hrms.git && cd frappe-hrms",
+
+        "sh /home/ubuntu/frappe-hrms/script.sh ${var.domain}"
     ]
   }
   tags = {
@@ -20,4 +22,8 @@ resource "aws_instance" "hrms_inst" {
     Name        = "${var.company}-hrms-master-ec2"
   }
 
+}
+
+output "domain_configuration" {
+  value = "Update your dns with value${aws_instance.hrms_inst.public_dns}"
 }

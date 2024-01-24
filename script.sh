@@ -16,4 +16,4 @@ docker exec -it frappe-hrms_frappe_1 bash -c "cd /home/frappe/frappe-bench && be
 docker exec -it frappe-hrms_frappe_1 bash -c "cd /home/frappe/frappe-bench && bench --site hrms install-app hrms"
 docker exec -it frappe-hrms_frappe_1 bash -c "cd /home/frappe/frappe-bench && bench start" &
 
-docker-compose -f caddy-compose.yaml up -d
+# docker-compose -f caddy-compose.yaml up -d

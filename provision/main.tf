@@ -1,5 +1,5 @@
 resource "aws_instance" "hrms_inst" {
-  ami = data.aws_ami.ubuntu.id
+  ami = "ami-0a7cf821b91bcccbc"
   instance_type = var.instanceType
   key_name = "gaction1"
 
@@ -11,7 +11,7 @@ resource "aws_instance" "hrms_inst" {
   }
   provisioner "remote-exec" {
     inline = [
-      file("../script.sh")
+      "sh /home/ubuntu/frappe-hrms/script.sh ${var.domain}"
     ]
   }
   tags = {

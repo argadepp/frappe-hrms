@@ -18,7 +18,7 @@ docker cp common_site_config.json frappe-hrms_frappe_1:/home/frappe/frappe-bench
 docker exec -it frappe-hrms_frappe_1 bash -c "cd /home/frappe/frappe-bench && bench get-app erpnext && bench get-app hrms"
 docker exec -it frappe-hrms_frappe_1 bash -c "cd /home/frappe/frappe-bench && bench new-site hrms --force --no-mariadb-socket --admin-password=admin --db-host=mariadb --db-root-password=123 --install-app erpnext --set-default"
 docker exec -it frappe-hrms_frappe_1 bash -c "cd /home/frappe/frappe-bench && bench --site hrms install-app hrms"
-docker exec frappe-hrms_frappe_1 bash -c "cd /home/frappe/frappe-bench && bench stop"
+docker exec frappe-hrms_frappe_1 bash -c "cd /home/frappe/frappe-bench && bench start"
 
 # Define variables
 KEY_TO_REPLACE="DOMAIN"

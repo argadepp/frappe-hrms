@@ -5,8 +5,6 @@ services:
     image: caddy:latest
     container_name: frappe-https-proxy
     restart: unless-stopped
-    depends_on:
-      - frappe
     command: caddy reverse-proxy --from ${DOMAIN} --to ${DOMAIN}:8000
     volumes:
       - ./caddy:/data/caddy

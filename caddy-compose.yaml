@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  https-proxy:
+    image: caddy:latest
+    container_name: frappe-https-proxy
+    restart: unless-stopped
+    depends_on:
+      - frappe
+    command: caddy reverse-proxy --from ${DOMAIN} --to ${DOMAIN}:8000
+    volumes:
+      - ./caddy:/data/caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    env_file:
+      - .env

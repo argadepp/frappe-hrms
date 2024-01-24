@@ -17,15 +17,6 @@ services:
     networks:
       - mynetwork
 
-  # postgresql:
-  #   image: postgres:11.8
-  #   environment:
-  #     POSTGRES_PASSWORD: 123
-  #   volumes:
-  #     - postgresql-data:/var/lib/postgresql/data
-  #   networks:
-  #     - mynetwork
-
   redis-cache:
     image: docker.io/redis:alpine
     ports:
@@ -53,9 +44,10 @@ services:
       - 9000-9005:9000-9005
     networks:
       - mynetwork
+
 volumes:
   mariadb-data:
-  postgresql-data:
+
 
 networks:
   mynetwork:

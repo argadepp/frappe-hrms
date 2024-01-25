@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Assume Role'){
             steps{
-                // sh "pwd && ls -lar  "
+                sh "chmod +x jobs/scripts/assume-role.sh"
                 sh(script: 'jobs/scripts/assume-role.sh')
             }
  

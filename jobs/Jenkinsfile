@@ -8,6 +8,7 @@ pipeline {
     stages {
         stage('Assume Role'){
             steps{
+                sh "PWD"
                 sh(script: '${WORKSPACE}/jobs/scripts/assume-role.sh')
             }
  

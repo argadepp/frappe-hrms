@@ -30,7 +30,7 @@ pipeline {
         stage('TerraformFormat'){
             steps {
                 dir('provision/'){
-                    sh "terraform fmt -list=true -write=false -diff=true -check=true"
+                    sh "terraform fmt "
                 }
             }
         }

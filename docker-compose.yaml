@@ -40,7 +40,7 @@ services:
       - ..:/workspace:cached
     working_dir: /workspace/development
     ports:
-      - 8000-8005:8000-8005
+      - 7000-7005:8000-8005
       - 9000-9005:9000-9005
     networks:
       - mynetwork

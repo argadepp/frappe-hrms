@@ -66,7 +66,7 @@ pipeline {
                     if(apply){
                         dir('provision/'){
                             unstash "terraform-plan"
-                            sh "terraform apply terraform.tfplan -var 'instanceType=${InstanceType}' -var 'company=${Company}' -var 'domain=${Domain}'"
+                            sh 'terraform apply terraform.tfplan' 
                         }
                     }
                 }

@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Assume Role'){
             steps{
-                sh "aws sts assume-role --region ap-south-1 --role-arn 'arn:aws:iam::734522607489:role/terraform-infra-create-role' --role-session-name deploy-frappe"
+                sh(script: '${WORKSPACE}/jobs/scripts/assume-role.sh')
             }
  
         }

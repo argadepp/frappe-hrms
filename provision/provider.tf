@@ -1,5 +1,6 @@
 provider "aws" {
-  access_key = "AKIA2WBHVQ6A55V2WZN7"
-  secret_key = "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"
+  assume_role {
+    role_arn = "arn:aws:iam::734522607489:role/terraform-infra-create-role"
+  }
   region = "ap-south-1"
 }

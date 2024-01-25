@@ -3,6 +3,9 @@ pipeline {
 
     parameters {
         string(name: 'WORKSPACE', defaultValue: 'development', description:'setting up workspace for terraform')
+        string(name: 'Domain', defaultValue: 'example.com',description:'Share domain to create site')
+        string(name: 'Company', defaultValue: 'NA',description:'Share company name')
+        choice(name: 'InstanceType', choices: ['t2.medium','t2,small'])
     }
 
     stages {
@@ -32,31 +35,20 @@ pipeline {
             }
         }
 
-        stage('TerraformValidate'){
+        stage('TerraformPlan'){
             steps {
                 dir('provision/'){
-                    sh "terraform validate"
+                    script {
+                        try {
+                            sh "terraform workspace new ${params.WORKSPACE}"
+                        } catch (err) {
+                            sh "terraform workspace select ${params.WORKSPACE}"
+                        }
+                        sh "terraform plan -var 'instanceType=${InstanceType}' -var 'company=${Company}' -var 'domain=${Domain}' "
+                    }
                 }
             }
         }
-
-        // stage('TerraformPlan'){
-        //     steps {
-        //         dir('jenkins-terraform-pipeline/ec2_pipeline/'){
-        //             script {
-        //                 try {
-        //                     sh "terraform workspace new ${params.WORKSPACE}"
-        //                 } catch (err) {
-        //                     sh "terraform workspace select ${params.WORKSPACE}"
-        //                 }
-        //                 sh "terraform plan -var 'access_key=$ACCESS_KEY' -var 'secret_key=$SECRET_KEY' -var 'instanceType=$instanceType' -var 'region=$region' -var 'capacityType=$capacityType' -var 'product=$product' \
-        //                 -var 'environment=$environment' -var 'cluster_version=$cluster_version' -var 'max_size=$max_size' -var 'min_size=$min_size' -var 'desired_size=$desired_size' -var 'max_unavailable=$max_unavailable'\
-        //                 -out terraform.tfplan;echo \$? > status"
-        //                 stash name: "terraform-plan", includes: "terraform.tfplan"
-        //             }
-        //         }
-        //     }
-        // }
         
         // stage('TerraformApply'){
         //     steps {

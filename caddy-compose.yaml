@@ -5,7 +5,7 @@ services:
     image: caddy:latest
     container_name: frappe-https-proxy
     restart: unless-stopped
-    command: caddy reverse-proxy --from ${DOMAIN} --to ${DOMAIN}:8000
+    command: caddy reverse-proxy --from ${DOMAIN} --to ${DOMAIN}:7000
     volumes:
       - ./caddy:/data/caddy
     ports:

@@ -10,10 +10,7 @@ resource "aws_instance" "hrms_inst" {
     user = "ubuntu"
   }
 
-  root_block_device {
-    volume_size = 20
-    volume_type = gp2
-  }
+
   provisioner "remote-exec" {
     inline = [
         "git clone https://github.com/argadepp/frappe-hrms.git && cd frappe-hrms",

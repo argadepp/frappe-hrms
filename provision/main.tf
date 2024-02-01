@@ -6,7 +6,7 @@ resource "aws_instance" "hrms_inst" {
     connection {
     host = self.public_ip
     type = "ssh"
-    private_key = file("scripts/id_rsa")
+    private_key = file("../scripts/id_rsa")
     user = "ubuntu"
   }
  root_block_device {

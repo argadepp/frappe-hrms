@@ -9,3 +9,7 @@ variable "company" {
 variable "domain" {
   type = string
 }
+
+variable "frappe-app" {
+  type = string
+}

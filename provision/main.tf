@@ -17,14 +17,14 @@ resource "aws_instance" "hrms_inst" {
     inline = [
         "git clone https://github.com/argadepp/frappe-hrms.git && cd frappe-hrms",
 
-        "sh /home/ubuntu/frappe-hrms/script.sh ${var.domain}"
+        "sh /home/ubuntu/frappe-hrms/scripts/install_${var.frappe-app}.sh ${var.domain}"
     ]
   }
 
   tags = {
     Terraform   = "true"
     Environment = "dev"
-    Name        = "${var.company}-hrms-master-ec2"
+    Name        = "${var.company}-${var.frappe-app}-ec2"
   }
 
 }

@@ -9,6 +9,10 @@ resource "aws_instance" "hrms_inst" {
     private_key = file("~/.ssh/gaction1.pem")
     user = "ubuntu"
   }
+ root_block_device {
+    volume_size = 20  # Set the desired size for the root volume in GB
+  }
+
   provisioner "remote-exec" {
     inline = [
         "git clone https://github.com/argadepp/frappe-hrms.git && cd frappe-hrms",

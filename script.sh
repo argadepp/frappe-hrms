@@ -20,11 +20,11 @@ docker exec -it frappe-hrms_frappe_1 bash -c "cd /home/frappe/frappe-bench && be
 docker exec -it frappe-hrms_frappe_1 bash -c "cd /home/frappe/frappe-bench && bench --site hrms install-app hrms"
 docker exec frappe-hrms_frappe_1 bash -c "cd /home/frappe/frappe-bench && bench start &"
 
-# Define variables
-KEY_TO_REPLACE="DOMAIN"
-NEW_VALUE=$1
+# # Define variables
+# KEY_TO_REPLACE="DOMAIN"
+# NEW_VALUE=$1
 
-# Run sed command
-sed -i "s/^${KEY_TO_REPLACE}=.*/${KEY_TO_REPLACE}=${NEW_VALUE}/" .env
+# # Run sed command
+# sed -i "s/^${KEY_TO_REPLACE}=.*/${KEY_TO_REPLACE}=${NEW_VALUE}/" .env
 
-docker-compose -f caddy-compose.yaml up -d
+# docker-compose -f caddy-compose.yaml up -d

@@ -1,0 +1,27 @@
+name: AWS 
+on:
+  workflow_dispatch:
+    inputs:
+      product:
+        required: true
+        description: Product
+        default: pdt  
+jobs:
+  deploy:
+    name: Create hrms instance
+    runs-on: ubuntu-latest
+    # These permissions are needed to interact with GitHub's OIDC Token endpoint.
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: Configure AWS credentials from Test account
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::734522607489:role/github-action
+        aws-region: ap-south-1
+    - name: Create Instance
+      run: |
+        aws s3 ls

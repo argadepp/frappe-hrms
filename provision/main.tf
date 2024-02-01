@@ -16,6 +16,7 @@ resource "aws_instance" "hrms_inst" {
         "sh /home/ubuntu/frappe-hrms/script.sh ${var.domain}"
     ]
   }
+
   tags = {
     Terraform   = "true"
     Environment = "dev"

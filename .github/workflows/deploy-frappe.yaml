@@ -60,7 +60,7 @@ jobs:
     - name: Get the keyfile
       run: |
         echo "${{ secrets.SSH_KEY }}" > "${{ github.workspace }}/scripts/id_rsa"
-        chmod 600 "${{ github.workspace }}/controleplane/cluster/modules/scripts/id_rsa"
+        chmod 600 "${{ github.workspace }}/scripts/id_rsa"
 
     - name: Configure AWS credentials from Test account
       uses: aws-actions/configure-aws-credentials@v4

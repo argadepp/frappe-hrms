@@ -28,3 +28,5 @@ docker exec frappe-hrms_frappe_1 bash -c "cd /home/frappe/frappe-bench && bench 
 # sed -i "s/^${KEY_TO_REPLACE}=.*/${KEY_TO_REPLACE}=${NEW_VALUE}/" .env
 
 # docker-compose -f caddy-compose.yaml up -d
+
+echo "HRMS app installed successfully and running!!!!!!!!!!!!"

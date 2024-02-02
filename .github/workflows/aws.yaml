@@ -1,11 +1,11 @@
-name: AWS 
+name: Get public ip and details 
 on:
   workflow_dispatch:
     inputs:
-      product:
+      Company:
         required: true
-        description: Product
-        default: pdt  
+        description: Company
+
 jobs:
   deploy:
     name: Create hrms instance
@@ -24,4 +24,4 @@ jobs:
         aws-region: ap-south-1
     - name: Create Instance
       run: |
-        aws s3 ls
+        aws ec2 describe-instances --filters "Name=tag:Name,Values=${Company}-hrms-ec2" --query "Reservations[].Instances[].PublicIpAddress" --output json

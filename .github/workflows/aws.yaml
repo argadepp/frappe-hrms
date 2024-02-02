@@ -5,7 +5,9 @@ on:
       Company:
         required: true
         description: Company
-
+      Domain:
+        required: true
+        description: Domain     
 jobs:
   deploy:
     name: Get public ip

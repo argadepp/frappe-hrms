@@ -40,7 +40,7 @@ jobs:
         password: ${{ inputs.Password }}
         port: 22
         source: "scripts/install_${{ inputs.frappeApp }}.sh"
-        target: /home/${{ inputes.User }}
+        target: "/home/${{ inputes.User }}"
 
     - name: SSH and run commands
       uses: appleboy/ssh-action@master
@@ -50,6 +50,6 @@ jobs:
         password: ${{ inputs.Password}}
         port: 22
         script: |
-          "ls -la"   
+          "cat /home/${{ inputes.User }}/install_${{ inputs.frappeApp }}.sh"   
 
 

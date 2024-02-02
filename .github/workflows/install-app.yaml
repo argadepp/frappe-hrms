@@ -45,7 +45,9 @@ jobs:
         password: ${{ inputs.Password}}
         port: 22
         run: |
-         echo $FILE_CONTENT > /tmp/script.sh
-         cat /tmp/script.sh 
+         curl -O "https://raw.githubusercontent.com/argadepp/frappe-hrms/master/scripts/install_${{ inputs.frappeApp}}.sh"
+         curl -O https://raw.githubusercontent.com/argadepp/frappe-hrms/master/common_site_config.json
+         chmod +x *
+         "./install_${{ inputs.frappeApp}}.sh"
 
 

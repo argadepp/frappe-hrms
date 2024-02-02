@@ -1,4 +1,4 @@
-name: Get public ip and details 
+name: Enable HTTPS
 on:
   workflow_dispatch:
     inputs:
@@ -26,7 +26,15 @@ jobs:
       with:
         role-to-assume: arn:aws:iam::734522607489:role/github-action
         aws-region: ap-south-1
-    - name: Get public ip
+    - name: Build & Deploy
+      env:
+          PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          HOSTNAME: ""
+          USER_NAME: ubuntu
+    
       run: |
-        publicIP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=${{ inputs.Company }}-hrms-ec2" --query "Reservations[].Instances[].PublicIpAddress" --output json)
-        echo "please configure "$publicIP " on your domain ${{ Domain }}!!!!!!"    
+        export pIP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=${{ inputs.Company }}-hrms-ec2" --query "Reservations[].Instances[].PublicIpAddress" --output json)
+        echo "please configure "$publicIP " on your domain ${{ Domain }}!!!!!!" 
+        echo "Host Name=$pIP"
+        echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@$pIP "cd frappe-hrms/scripts && chmod +x * && ./make_https.sh ${{ inputs.Domain }}"

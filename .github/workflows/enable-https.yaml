@@ -44,7 +44,7 @@ jobs:
           USER_NAME: ubuntu
     
       run: |
-        export pIP=$(aws ec2 describe-instances   --filters "Name=tag:Name,Values=${{ inputs.Company }}-hrms-ec2"   --query "Reservations[*].Instances[*].PublicIpAddress"   --output text)
+        export pIP=$(aws ec2 describe-instances   --filters "Name=tag:Name,Values=${{ inputs.Company }}-${{ inputs.frappeApp }}-ec2"   --query "Reservations[*].Instances[*].PublicIpAddress"   --output text)
 
         echo "Host Name=$pIP"
         echo "$PRIVATE_KEY" > private_key && chmod 600 private_key

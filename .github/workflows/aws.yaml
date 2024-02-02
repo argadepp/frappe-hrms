@@ -27,18 +27,18 @@ jobs:
     - name: Get public ip
       run: |
         publicIP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=${{ inputs.Company }}-hrms-ec2" --query "Reservations[].Instances[].PublicIpAddress" --output text)
-        echo "please configure "$publicIP " on your domain!!!!!!"
+        echo "Please configure "$publicIP " on ${{ inputs.Domain }}"
 
 
-    - name: Build & Deploy
-      env:
-          PRIVATE_KEY: ${{ secrets.SSH_KEY }}
-          HOSTNAME: ""
-          USER_NAME: ubuntu
+    # - name: Build & Deploy
+    #   env:
+    #       PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+    #       HOSTNAME: ""
+    #       USER_NAME: ubuntu
     
-      run: |
-        export pIP=$(aws ec2 describe-instances   --filters "Name=tag:Name,Values=${{ inputs.Company }}-hrms-ec2"   --query "Reservations[*].Instances[*].PublicIpAddress"   --output text)
+    #   run: |
+    #     export pIP=$(aws ec2 describe-instances   --filters "Name=tag:Name,Values=${{ inputs.Company }}-hrms-ec2"   --query "Reservations[*].Instances[*].PublicIpAddress"   --output text)
 
-        echo "Host Name=$pIP"
-        echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@$pIP "cd frappe-hrms/scripts && chmod +x * && ./make_https.sh ${{ inputs.Domain }}"
+    #     echo "Host Name=$pIP"
+    #     echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+    #     ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@$pIP "cd frappe-hrms/scripts && chmod +x * && ./make_https.sh ${{ inputs.Domain }}"

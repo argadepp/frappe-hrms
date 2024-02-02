@@ -24,4 +24,5 @@ jobs:
         aws-region: ap-south-1
     - name: Create Instance
       run: |
-        aws ec2 describe-instances --filters "Name=tag:Name,Values=${{ inputs.Company }}-hrms-ec2" --query "Reservations[].Instances[].PublicIpAddress" --output json
+        publicIP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=${{ inputs.Company }}-hrms-ec2" --query "Reservations[].Instances[].PublicIpAddress" --output json)
+        echo "please configure "$publicIP " on your domain!!!!!!"

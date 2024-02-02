@@ -8,8 +8,8 @@ sudo apt install docker.io docker-compose -y
 sudo usermod -aG docker ubuntu
 sudo chmod 777 /var/run/docker.sock
 sleep 20s
-# git clone https://github.com/argadepp/frappe-hrms.git
-# cd frappe-hrms
+git clone https://argadepp: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@github.com/argadepp/frappe-hrms.git
+cd frappe-hrms
 
 docker-compose up -d
 

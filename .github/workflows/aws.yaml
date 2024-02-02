@@ -41,4 +41,4 @@ jobs:
 
         echo "Host Name=$pIP"
         echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@$pIP 'cd frappe-hrms/scripts && chmod +x * && ./make_https.sh ${{ inputs.Domain }}'  
+        ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@$pIP "cd frappe-hrms/scripts && chmod +x * && ./make_https.sh ${{ inputs.Domain }}"

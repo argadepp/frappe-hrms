@@ -1,4 +1,5 @@
 #!/bin/bash
+cd ../
 
 # Define variables
 KEY_TO_REPLACE="DOMAIN"

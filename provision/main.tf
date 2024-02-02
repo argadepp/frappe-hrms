@@ -15,7 +15,7 @@ resource "aws_instance" "hrms_inst" {
 
   provisioner "remote-exec" {
     inline = [
-        "git clone https://github.com/argadepp/frappe-hrms.git && cd frappe-hrms",
+       # " git clone https://argadepp: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@github.com/argadepp/frappe-hrms.git",
 
         "sh /home/ubuntu/frappe-hrms/scripts/install_${var.frappe-app}.sh ${var.domain}"
         # file("../scripts/install_${var.frappe-app}.sh")

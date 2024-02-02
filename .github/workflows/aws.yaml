@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    name: Create hrms instance
+    name: Get public ip
     runs-on: ubuntu-latest
     # These permissions are needed to interact with GitHub's OIDC Token endpoint.
     permissions:
@@ -24,4 +24,4 @@ jobs:
         aws-region: ap-south-1
     - name: Create Instance
       run: |
-        aws ec2 describe-instances --filters "Name=tag:Name,Values=${Company}-hrms-ec2" --query "Reservations[].Instances[].PublicIpAddress" --output json
+        aws ec2 describe-instances --filters "Name=tag:Name,Values=${{ inputs.Company }}-hrms-ec2" --query "Reservations[].Instances[].PublicIpAddress" --output json

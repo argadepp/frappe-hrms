@@ -32,15 +32,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    - name: copy file via ssh password
-      uses: appleboy/scp-action@v0.1.7
-      with:
-        host: ${{ inputs.IP }}
-        username: ${{ inputs.User }}
-        password: ${{ inputs.Password }}
-        port: 22
-        source: "scripts/install_${{ inputs.frappeApp }}.sh"
-        target: "/home/${{ inputes.User }}"
 
     - name: SSH and run commands
       uses: appleboy/ssh-action@master
@@ -49,7 +40,8 @@ jobs:
         username: ${{ inputs.User }}
         password: ${{ inputs.Password}}
         port: 22
-        script: |
-          "cat /home/${{ inputes.User }}/install_${{ inputs.frappeApp }}.sh"   
+        run: |
+         "chmod +x ./scripts/install_${{ inputs.frappeApp }}.sh"
+         "./scripts/install_${{ inputs.frappeApp }}.sh"
 
 

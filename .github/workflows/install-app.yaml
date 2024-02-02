@@ -40,14 +40,6 @@ jobs:
         password: ${{ inputs.Password}}
         port: 22
         script: |
-          echo "Running on remote server"      
+          cat scripts/install_hrms.sh    
 
-    # - name: Installing Frappe Apps
-    #   env:
-    #       PRIVATE_KEY: ${{ inputs.Password }}
-    #       HOSTNAME: ${{ inputs.IP }}
-    #       USER_NAME: ${{ inputs.User }}
-    
-    #   run: |
-    #     echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-    #     ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} "sudo apt update"
+

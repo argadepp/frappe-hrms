@@ -50,6 +50,6 @@ jobs:
         password: ${{ inputs.Password}}
         port: 22
         script: |
-          "cat /home/${{ inputes.User }}/install_${{ inputs.frappeApp }}.sh"   
+          "ls -la"   
 
 

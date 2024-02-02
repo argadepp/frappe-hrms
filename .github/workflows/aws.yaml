@@ -6,10 +6,6 @@ on:
         required: true
         description: Company
 
-      Domain:
-        required: true
-        description: Domain        
-
 jobs:
   deploy:
     name: Get public ip
@@ -29,4 +25,4 @@ jobs:
     - name: Get public ip
       run: |
         publicIP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=${{ inputs.Company }}-hrms-ec2" --query "Reservations[].Instances[].PublicIpAddress" --output json)
-        echo "please configure "$publicIP " on your domain ${{ Domain }}!!!!!!"    
+        echo "please configure "$publicIP " on your domain!!!!!!"

@@ -1,0 +1,53 @@
+name: Install Frappe App on ready server
+on:
+  workflow_dispatch:
+    inputs:
+      IP:
+        required: true
+        description: IP
+      User:
+        required: true
+        description: User 
+      Password:
+        required: true
+        description: Password                
+      Domain:
+        required: true
+        description: Domain  
+      frappeApp:
+        type: choice
+        description: Select frappe app
+        options:
+          - hrms
+          - helth
+          - helpdesk           
+jobs:
+  deploy:
+    name: Install Frappe App on Server
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: SSH and run commands
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ inputs.IP }}
+        username: ${{ inputs.User }}
+        password: ${{ inputs.Password}}
+        port: 22
+        script: |
+          echo "Running on remote server"      
+
+    # - name: Installing Frappe Apps
+    #   env:
+    #       PRIVATE_KEY: ${{ inputs.Password }}
+    #       HOSTNAME: ${{ inputs.IP }}
+    #       USER_NAME: ${{ inputs.User }}
+    
+    #   run: |
+    #     echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+    #     ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} "sudo apt update"

@@ -31,7 +31,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-
+    - name: Read file content and set environment variable
+      run: |
+        # Replace 'path/to/your/file.txt' with the actual path to your file
+        export FILE_CONTENT=$(cat scripts/install_hrms.sh)
+        echo "File Content: $FILE_CONTENT"
 
     - name: SSH and run commands
       uses: appleboy/ssh-action@master
@@ -41,7 +45,7 @@ jobs:
         password: ${{ inputs.Password}}
         port: 22
         run: |
-         "chmod +x ./scripts/install_${{ inputs.frappeApp }}.sh"
-         "./scripts/install_${{ inputs.frappeApp }}.sh"
+         echo $FILE_CONTENT > /tmp/script.sh
+         cat /tmp/script.sh 
 
 

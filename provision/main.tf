@@ -18,7 +18,7 @@ resource "aws_instance" "hrms_inst" {
         # "git clone https://github.com/argadepp/frappe-hrms.git && cd frappe-hrms",
 
         # "sh /home/ubuntu/frappe-hrms/scripts/install_${var.frappe-app}.sh ${var.domain}"
-        file("../scripts/install_${var.frappe-app}.sh ${var.domain}")
+        file("../scripts/install_${var.frappe-app}.sh")
     ]
     
   }

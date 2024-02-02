@@ -1,4 +1,4 @@
-name: Get public ip and details 
+name: Enable HTTPS to frappe app
 on:
   workflow_dispatch:
     inputs:

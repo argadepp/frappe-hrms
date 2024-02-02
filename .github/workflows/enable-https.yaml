@@ -7,7 +7,14 @@ on:
         description: Company
       Domain:
         required: true
-        description: Domain     
+        description: Domain  
+      frappeApp:
+        type: choice
+        description: Select frappe app
+        options:
+          - hrms
+          - helth
+          - helpdesk           
 jobs:
   deploy:
     name: Enable HTTPS on site
@@ -26,7 +33,7 @@ jobs:
         aws-region: ap-south-1
     - name: Get public ip
       run: |
-        publicIP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=${{ inputs.Company }}-hrms-ec2" --query "Reservations[].Instances[].PublicIpAddress" --output text)
+        publicIP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=${{ inputs.Company }}-${{ inputs.frappeApp }}-ec2" --query "Reservations[].Instances[].PublicIpAddress" --output text)
         echo "please configure "$publicIP " on ${{ inputs.Domain }}"
 
 

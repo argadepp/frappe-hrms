@@ -47,6 +47,6 @@ jobs:
          curl -O https://raw.githubusercontent.com/argadepp/frappe-hrms/master/common_site_config.json
          curl -O https://raw.githubusercontent.com/argadepp/frappe-hrms/master/docker-compose.yaml
          chmod +x *
-         "./install_${{ inputs.frappeApp}}.sh" "$Domain" "$App"
+         "./install_${{ inputs.frappeApp}}.sh" "${{ inputs.Domain }}" "${{ inputs.frappeApp }}"
 
 

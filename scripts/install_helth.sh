@@ -11,7 +11,7 @@ sleep 20s
 #git clone https://argadepp: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@github.com/argadepp/frappe-hrms.git
 cd frappe-hrms
 
-docker-compose up -d
+docker-compose -p frappe-hrms up -d
 
 docker exec -it frappe-hrms_frappe_1 bash -c "cd /home/frappe && bench init --skip-redis-config-generation frappe-bench"
 docker cp common_site_config.json frappe-hrms_frappe_1:/home/frappe/frappe-bench/sites/

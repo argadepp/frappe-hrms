@@ -15,9 +15,9 @@ docker-compose -p $app up -d
 
 docker exec $app"_frappe_1" bash -c "cd /home/frappe && bench init --skip-redis-config-generation frappe-bench"
 docker cp common_site_config.json $app"_frappe_1":/home/frappe/frappe-bench/sites/
-docker exec $app"_frappe_1" bash -c "cd /home/frappe/frappe-bench && bench get-app erpnext && bench get-app healthcare"
-docker exec $app"_frappe_1" bash -c "cd /home/frappe/frappe-bench && bench new-site $domain --force --no-mariadb-socket --admin-password=admin --db-host=mariadb --db-root-password=123 --install-app erpnext --set-default"
-docker exec $app"_frappe_1" bash -c "cd /home/frappe/frappe-bench && bench --site $domain install-app healthcare"
+docker exec $app"_frappe_1" bash -c "cd /home/frappe/frappe-bench && bench get-app helpdesk"
+docker exec $app"_frappe_1" bash -c "cd /home/frappe/frappe-bench && bench new-site $domain --force --no-mariadb-socket --admin-password=admin --db-host=mariadb --db-root-password=123 --install-app helpdesk --set-default"
+
 docker exec $app"_frappe_1" bash -c "cd /home/frappe/frappe-bench && bench start &"
 
 # Define variables
@@ -29,4 +29,4 @@ docker exec $app"_frappe_1" bash -c "cd /home/frappe/frappe-bench && bench start
 
 # docker-compose -f caddy-compose.yaml up -d
 
-echo "Helthcare app installed successfully and running!!!!!!!!!!!!"
+echo "Helpdesk app installed successfully and running!!!!!!!!!!!!"
